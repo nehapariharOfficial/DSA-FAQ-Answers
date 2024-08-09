@@ -1,0 +1,70 @@
+plugins {
+    id 'java'
+    id 'checkstyle'
+    id 'jacoco'
+    id 'com.github.spotbugs' version '6.0.20'
+}
+
+group = 'org.informationbites'
+version = '1.0-SNAPSHOT'
+
+//plugin level configurations [START]....................
+checkstyle {
+    toolVersion = '10.12.4'
+    config = resources.text.fromFile('config/checkstyle/checkstyle.xml')
+}
+
+spotbugs {
+    toolVersion = '4.8.6'
+}
+
+jacoco {
+    toolVersion = '0.8.12'
+}
+//plugin level configurations [END]....................
+
+//task level configurations [START]....................
+tasks.withType(Checkstyle) {
+    enabled = false // Added to get report of checkstyle related problems. Mark enable = true whenever needed.
+    reports {
+        xml.required = false
+        html.required = true
+    }
+    ignoreFailures = true
+}
+
+tasks.spotbugsMain {
+    enabled = false // Added to find bugs via static code analysis. Mark enable = true whenever needed.
+    reports.create("html") {
+        required = true
+        setStylesheet("fancy-hist.xsl")
+    }
+    ignoreFailures = true
+}
+//task level configurations [END]....................
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.apache.logging.log4j:log4j-api:2.23.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
+}
+
+test {
+    useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+jacocoTestReport {
+    dependsOn test  //Ensures tests are run before generating the report
+    reports {
+        xml.required.set(false)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+}
+
