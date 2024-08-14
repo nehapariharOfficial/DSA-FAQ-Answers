@@ -4,6 +4,8 @@ package org.informationbits.LinkedList.solutionsuit;
 import org.informationbits.LinkedList.datastructures.LinkedListNode;
 import org.informationbits.LinkedList.util.LinkedListCreator;
 
+import static org.informationbits.LinkedList.util.Search.find;
+
 public class ReverseVariants {
 
     public static LinkedListNode reverseV1(LinkedListNode head) {
@@ -206,9 +208,9 @@ public class ReverseVariants {
     }
 
     /**
-    Note - There is difference in reverseV9 and reverseV8. If size of K is greater than the available elements
-     (in the end or in total) then reverseV9 would still reverse those elements but reverseV8 would not.
-    **/
+     * Note - There is difference in reverseV9 and reverseV8. If size of K is greater than the available elements
+     * (in the end or in total) then reverseV9 would still reverse those elements but reverseV8 would not.
+     **/
     public static LinkedListNode reverseV9(LinkedListNode head, int k) {
         if (head == null || head.next == null || k <= 1) return head;
 
@@ -233,13 +235,13 @@ public class ReverseVariants {
 
     public static LinkedListNode reverseV10(LinkedListNode head, int start, int end) {
         int len = LinkedListCreator.size(head);
-        if (start<=0) start = 1;
+        if (start <= 0) start = 1;
         if (end >= len) end = len;
 
-        if(head == null || head.next == null || start>=end || end<=0 || start>=len) return head;
+        if (head == null || head.next == null || start >= end || end <= 0 || start >= len) return head;
 
-        LinkedListNode[] posStart =  LinkedListCreator.find(head,start);
-        LinkedListNode[] posEnd =  LinkedListCreator.find(head,end);
+        LinkedListNode[] posStart = find(head, start);
+        LinkedListNode[] posEnd = find(head, end);
 
         LinkedListNode prevToGroup = posStart[0], groupStart = posStart[1], groupEnd = posEnd[1], nextToGroup = groupEnd.next;
 
@@ -251,6 +253,53 @@ public class ReverseVariants {
         if (prevToGroup != null) prevToGroup.next = groupEnd;
         groupStart.next = nextToGroup;
 
-        return prevToGroup == null ? groupEnd:head;
+        return prevToGroup == null ? groupEnd : head;
     }
+
+    /**
+     * In this we break the given LinkedList nodes in group of 1,2,3,4......
+     * than reverse the groups that has even number of nodes.
+     * <p>
+     * e.g. -
+     * Input  - 1->2->3->4->5->6->7->8->9->10->11->12
+     * Output - 1->(3->2)->4->5->6->(10->9->8->7)->(12->11)
+     * Note in the last nodes left are even so they are reversed.
+     */
+    public static LinkedListNode reverseEvenLengthGroups(LinkedListNode head) {
+        if (head == null || head.next == null) return head;
+        LinkedListNode prevToGroup = head, groupStart = head.next, groupEnd = null, nextToGroup = null;
+        LinkedListNode curr = groupStart;
+        int groupSize = 2, nodeCnt = 1;
+
+        while (curr != null) {
+            if (nodeCnt == groupSize || curr.next == null) {
+                if (nodeCnt % 2 == 0) {
+                    groupEnd = curr;
+                    nextToGroup = curr.next;
+                    prevToGroup.next = null;
+                    groupEnd.next = null;
+
+                    reverseV1(groupStart);
+
+                    prevToGroup.next = groupEnd;
+                    groupStart.next = nextToGroup;
+
+                    prevToGroup = groupStart;
+                    groupStart = nextToGroup;
+                    curr = groupStart;
+                } else {
+                    prevToGroup = curr;
+                    groupStart = curr.next;
+                    curr = groupStart;
+                }
+                groupSize++;
+                nodeCnt = 1;
+            } else {
+                curr = curr.next;
+                nodeCnt++;
+            }
+        }
+        return head;
+    }
+
 }

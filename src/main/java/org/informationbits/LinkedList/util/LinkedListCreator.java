@@ -28,17 +28,6 @@ public class LinkedListCreator<T> {
         return len;
     }
 
-    public static LinkedListNode[] find(LinkedListNode head, int index) {
-        if (head == null || index<=0) return new LinkedListNode[]{null, null};
-        LinkedListNode prev = null, curr =head;
-        for (int i=2; i<=index;i++) {
-           if (curr == null) return new LinkedListNode[]{null, null};
-           prev = curr;
-           curr = curr.next;
-        }
-        return new LinkedListNode[]{prev, curr};
-    }
-
     public static LinkedListNode clone(LinkedListNode head) {
         LinkedListNode newHead = null, newCurr = null, newPrev = null, curr = head;
 
@@ -50,6 +39,16 @@ public class LinkedListCreator<T> {
             curr = curr.next;
         }
         return newHead;
+    }
+
+    public static boolean isEqual(LinkedListNode headOne, LinkedListNode headTwo) {
+        while (headOne != null && headTwo != null) {
+            if (headOne.data != headTwo.data) return false;
+            headOne = headOne.next;
+            headTwo = headTwo.next;
+        }
+        if (headOne != null || headTwo != null) return false;
+        return true;
     }
 
     private void insertNodeAtHead(LinkedListNode node) {
