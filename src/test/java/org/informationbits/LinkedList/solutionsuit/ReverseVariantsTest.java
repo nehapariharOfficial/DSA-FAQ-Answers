@@ -2,8 +2,8 @@ package org.informationbits.LinkedList.solutionsuit;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.informationbits.LinkedList.datastructures.LinkedList;
 import org.informationbits.LinkedList.datastructures.LinkedListNode;
-import org.informationbits.LinkedList.util.LinkedListCreator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.informationbits.LinkedList.util.LinkedListCreator.isEqual;
+import static org.informationbits.LinkedList.datastructures.LinkedList.isEqual;
 import static org.informationbits.LinkedList.util.PrintList.print;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,7 +30,7 @@ class ReverseVariantsTest {
             for (int j = 0; j < i; j++) {
                 inputInt[i][j] = i + j;
             }
-            inputLinkedLists.add(new LinkedListCreator(inputInt[i]).head);
+            inputLinkedLists.add(new LinkedList(inputInt[i]).head);
         }
     }
 
@@ -41,7 +41,7 @@ class ReverseVariantsTest {
     @Test
     void testReverseV1() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
             print(head, logger);
             assertTrue(isEqual(ReverseVariants.reverseV1(ReverseVariants.reverseV1(cloneListHead)), head));
         }
@@ -50,7 +50,7 @@ class ReverseVariantsTest {
     @Test
     void testReverseV2() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
             print(head, logger);
             assertTrue(isEqual(ReverseVariants.reverseV2(ReverseVariants.reverseV2(cloneListHead)), head));
         }
@@ -59,7 +59,7 @@ class ReverseVariantsTest {
     @Test
     void testReverseV3() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
             print(head, logger);
             assertTrue(isEqual(ReverseVariants.reverseV3(ReverseVariants.reverseV3(cloneListHead)), head));
         }
@@ -68,7 +68,7 @@ class ReverseVariantsTest {
     @Test
     void testReverseV4() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
             print(head, logger);
             assertTrue(isEqual(ReverseVariants.reverseV4(ReverseVariants.reverseV4(cloneListHead)), head));
         }
@@ -77,8 +77,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV5() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
             //Case 1:
             assertTrue(isEqual(ReverseVariants.reverseV5(
@@ -111,8 +111,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV6() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
 
             //Case 1:
@@ -146,8 +146,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV7() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
 
             //Case 1:
@@ -181,8 +181,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV8() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
 
             //Case 1:
@@ -213,8 +213,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV9() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
 
             //Case 1:
@@ -246,8 +246,8 @@ class ReverseVariantsTest {
     @Test
     void reverseV10() {
         for (LinkedListNode head : inputLinkedLists) {
-            LinkedListNode cloneListHead = LinkedListCreator.clone(head);
-            int len = LinkedListCreator.size(cloneListHead);
+            LinkedListNode cloneListHead = LinkedList.clone(head);
+            int len = LinkedList.size(cloneListHead);
             print(head, logger);
 
             //Case 1:
@@ -281,24 +281,24 @@ class ReverseVariantsTest {
     @Test
     void reverseEvenLengthGroups() {
         //Case 1:
-        LinkedListNode h1 = ReverseVariants.reverseEvenLengthGroups(new LinkedListCreator(new int[]{1}).head);
-        assertTrue(isEqual(h1, new LinkedListCreator(new int[]{1}).head));
+        LinkedListNode h1 = ReverseVariants.reverseEvenLengthGroups(new LinkedList(new int[]{1}).head);
+        assertTrue(isEqual(h1, new LinkedList(new int[]{1}).head));
 
         //Case 2:
-        LinkedListNode h2 = ReverseVariants.reverseEvenLengthGroups(new LinkedListCreator(new int[]{1, 2}).head);
-        assertTrue(isEqual(h2, new LinkedListCreator(new int[]{1, 2}).head));
+        LinkedListNode h2 = ReverseVariants.reverseEvenLengthGroups(new LinkedList(new int[]{1, 2}).head);
+        assertTrue(isEqual(h2, new LinkedList(new int[]{1, 2}).head));
 
         //Case 3:
-        LinkedListNode h3 = ReverseVariants.reverseEvenLengthGroups(new LinkedListCreator(new int[]{1, 2, 3}).head);
-        assertTrue(isEqual(h3, new LinkedListCreator(new int[]{1, 3, 2}).head));
+        LinkedListNode h3 = ReverseVariants.reverseEvenLengthGroups(new LinkedList(new int[]{1, 2, 3}).head);
+        assertTrue(isEqual(h3, new LinkedList(new int[]{1, 3, 2}).head));
 
         //Case 4:
-        LinkedListNode h4 = ReverseVariants.reverseEvenLengthGroups(new LinkedListCreator(new int[]{1, 2, 3, 4}).head);
-        assertTrue(isEqual(h4, new LinkedListCreator(new int[]{1, 3, 2, 4}).head));
+        LinkedListNode h4 = ReverseVariants.reverseEvenLengthGroups(new LinkedList(new int[]{1, 2, 3, 4}).head);
+        assertTrue(isEqual(h4, new LinkedList(new int[]{1, 3, 2, 4}).head));
 
         //Case 5:
-        LinkedListNode h5 = ReverseVariants.reverseEvenLengthGroups(new LinkedListCreator(new int[]{1, 2, 3, 4, 5}).head);
-        assertTrue(isEqual(h5, new LinkedListCreator(new int[]{1, 3, 2, 5, 4}).head));
+        LinkedListNode h5 = ReverseVariants.reverseEvenLengthGroups(new LinkedList(new int[]{1, 2, 3, 4, 5}).head);
+        assertTrue(isEqual(h5, new LinkedList(new int[]{1, 3, 2, 5, 4}).head));
 
     }
 }

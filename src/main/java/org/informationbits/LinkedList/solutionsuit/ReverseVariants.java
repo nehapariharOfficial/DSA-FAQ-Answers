@@ -1,8 +1,8 @@
 package org.informationbits.LinkedList.solutionsuit;
 
 
+import org.informationbits.LinkedList.datastructures.LinkedList;
 import org.informationbits.LinkedList.datastructures.LinkedListNode;
-import org.informationbits.LinkedList.util.LinkedListCreator;
 
 import static org.informationbits.LinkedList.util.Search.find;
 
@@ -234,7 +234,7 @@ public class ReverseVariants {
     }
 
     public static LinkedListNode reverseV10(LinkedListNode head, int start, int end) {
-        int len = LinkedListCreator.size(head);
+        int len = LinkedList.size(head);
         if (start <= 0) start = 1;
         if (end >= len) end = len;
 

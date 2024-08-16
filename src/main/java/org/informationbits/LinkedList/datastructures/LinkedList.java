@@ -1,17 +1,15 @@
-package org.informationbits.LinkedList.util;
+package org.informationbits.LinkedList.datastructures;
 
-
-import org.informationbits.LinkedList.datastructures.LinkedListNode;
 
 //TODO: Make it generic.
-public class LinkedListCreator<T> {
+public class LinkedList<T> {
     public LinkedListNode head;
 
-    public LinkedListCreator() {
+    public LinkedList() {
         this.head = null;
     }
 
-    public LinkedListCreator(int[] lst) {
+    public LinkedList(int[] lst) {
         if (lst == null || lst.length < 1) return;
         for (int i = lst.length - 1; i >= 0; i--) {
             LinkedListNode newNode = new LinkedListNode(lst[i]);
@@ -47,8 +45,7 @@ public class LinkedListCreator<T> {
             headOne = headOne.next;
             headTwo = headTwo.next;
         }
-        if (headOne != null || headTwo != null) return false;
-        return true;
+        return headOne == null && headTwo == null;
     }
 
     private void insertNodeAtHead(LinkedListNode node) {
