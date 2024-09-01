@@ -9,14 +9,15 @@ import static org.informationbits.LinkedList.util.Search.find;
 public class ReverseVariants {
 
     public static LinkedListNode reverseV1(LinkedListNode head) {
-        LinkedListNode prev = null, curr = head, next = head != null ? head.next : null;
-        while (curr != null) {
+        if (head == null || head.next == null) return head;
+        LinkedListNode prev = null, curr = head, next = head.next;
+        while (next != null) {
             curr.next = prev;
             prev = curr;
-            if (next == null) break;
             curr = next;
-            next = curr.next;
+            next = next.next;
         }
+        curr.next = prev;
         return curr;
     }
 
@@ -100,9 +101,12 @@ public class ReverseVariants {
         return prtPrev == null ? revPrtHead : head;
     }
 
-    //TODO: Simplify this function.
+    /**
+     * 1) Think about all the cases first, write the code
+     * 2) Validate conditions.
+     */
     public static LinkedListNode reverseV6(LinkedListNode head, int start, int end) {
-        if (start > end || end <= 0 || head == null || head.next == null) return head;
+        if ((end - start) < 1 || end <= 0 || head == null || head.next == null) return head;
 
         LinkedListNode dummy = new LinkedListNode(0);
         dummy.next = head;
@@ -120,11 +124,20 @@ public class ReverseVariants {
                 curr.next = prev;
             }
 
-            if (nodeTraversed > end || next == null) {
-                if (prev.next == curr && curr.next != prev) break;
+            /**
+             * nodeTraversed > end and next == null both could be true together so order of condition matters.
+             * */
+            if (nodeTraversed > end) {
                 if (nodeBeforeStart != null) {
-                    nodeBeforeStart.next.next = curr.next == prev ? next : curr;
-                    nodeBeforeStart.next = curr.next == prev ? curr : prev;
+                    nodeBeforeStart.next.next = curr;
+                    nodeBeforeStart.next = prev;
+                }
+                break;
+            }
+            if (next == null) {
+                if (nodeBeforeStart != null) {
+                    nodeBeforeStart.next.next = null;
+                    nodeBeforeStart.next = curr;
                 }
                 break;
             }

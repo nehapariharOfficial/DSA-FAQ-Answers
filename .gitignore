@@ -3,3 +3,4 @@
 
 # Ignore system files
 .idea
+.gradle
