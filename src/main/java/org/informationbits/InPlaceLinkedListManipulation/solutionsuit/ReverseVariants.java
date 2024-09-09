@@ -8,6 +8,9 @@ import static org.informationbits.InPlaceLinkedListManipulation.util.Search.find
 
 public class ReverseVariants {
 
+    /**
+     * https://leetcode.com/problems/reverse-linked-list/description/
+     */
     public static LinkedListNode reverseV1(LinkedListNode head) {
         if (head == null || head.next == null) return head;
         LinkedListNode prev = null, curr = head, next = head.next;
@@ -33,7 +36,9 @@ public class ReverseVariants {
         return curr;
     }
 
-
+    /**
+     * https://www.geeksforgeeks.org/recursively-reversing-a-linked-list-a-simple-implementation/
+     */
     public static LinkedListNode reverseV3(LinkedListNode head) {
         if (head == null || head.next == null) return head;
         else {
@@ -62,7 +67,10 @@ public class ReverseVariants {
         return dummy.next;
     }
 
-
+    /**
+     * https://leetcode.com/problems/reverse-linked-list-ii/description/
+     * https://leetcode.com/problems/reverse-linked-list-ii/solutions/30709/talk-is-cheap-show-me-the-code-and-drawing/
+     */
     public static LinkedListNode reverseV5(LinkedListNode head, int start, int end) {
         if (start > end || end <= 0 || head == null || head.next == null) return head;
 
@@ -187,7 +195,10 @@ public class ReverseVariants {
         return dummy.next;
     }
 
-    //TODO: Simplify this. 
+    /**
+     * https://leetcode.com/problems/reverse-nodes-in-k-group/description/
+     * https://leetcode.com/problems/reverse-nodes-in-k-group/solutions/11423/short-but-recursive-java-code-with-comments/
+     */
     public static LinkedListNode reverseV8(LinkedListNode head, int k) {
         if (head == null || head.next == null || k <= 1) return head;
         LinkedListNode curr = head, nodeBeforeGroup = null;
@@ -270,13 +281,7 @@ public class ReverseVariants {
     }
 
     /**
-     * In this we break the given InPlaceLinkedListManipulation nodes in group of 1,2,3,4......
-     * than reverse the groups that has even number of nodes.
-     * <p>
-     * e.g. -
-     * Input  - 1->2->3->4->5->6->7->8->9->10->11->12
-     * Output - 1->(3->2)->4->5->6->(10->9->8->7)->(12->11)
-     * Note in the last nodes left are even so they are reversed.
+     * https://leetcode.com/problems/reverse-nodes-in-even-length-groups/description/
      */
     public static LinkedListNode reverseEvenLengthGroups(LinkedListNode head) {
         if (head == null || head.next == null) return head;

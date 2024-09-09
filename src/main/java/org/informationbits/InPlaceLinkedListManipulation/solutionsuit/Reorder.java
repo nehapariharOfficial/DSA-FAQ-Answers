@@ -5,14 +5,10 @@ import org.informationbits.InPlaceLinkedListManipulation.datastructures.LinkedLi
 import static org.informationbits.InPlaceLinkedListManipulation.solutionsuit.ReverseVariants.reverseV1;
 import static org.informationbits.InPlaceLinkedListManipulation.util.Merge.mergeAlternate;
 
+/**
+ * https://leetcode.com/problems/reorder-list/description/
+ */
 public class Reorder {
-    /**
-     * Input  - 1 → 2 → 3
-     * Output - 1 → 3 → 2
-     * <p>
-     * Input  - 4 → 2 → 7 → 8 → 9 → 0 → 1
-     * Output - 4 → 1 → 2 → 0 → 7 → 9 → 8
-     */
     public static LinkedListNode reorderList(LinkedListNode head) {
         if (head == null || head.next == null || head.next.next == null) return head;
 
